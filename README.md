@@ -1,6 +1,6 @@
-## AWS X-Ray Kubernetes Serverless
+## Distributed Debugging for Kubernetes and Serverless Applications using AWS X-Ray
 
-Show distributed debugging in Kubernetes and Serverless applications using AWS X-Ray
+This repo explains how AWS X-Ray can be used for distributed debugging in Kubernetes and Serverless applications.
 
 ## Application
 
@@ -29,6 +29,12 @@ Show distributed debugging in Kubernetes and Serverless applications using AWS X
 
 	```
 	mvn package -Pdocker -Ddocker.tag=<tag>
+	```
+
+	By default, the Helm charts for deploying the application use `arungupta` repo and `xray` tag. These images can be created using the following command:
+
+	```
+	mvn package -Pdocker -Ddocker.tag=xray
 	```
 
 - Push Docker image to the registry:
