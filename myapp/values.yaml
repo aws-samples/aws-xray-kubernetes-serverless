@@ -11,4 +11,4 @@ webapp:
   replicaCount: 1
 
 docker:
-  tag: latest
+  tag: xray
