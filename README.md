@@ -4,6 +4,8 @@ This repo explains how AWS X-Ray can be used for distributed debugging in Kubern
 
 ## Application
 
+The application consists of three microservices: `webapp`, `greeting`, and `name`. The `webapp` microservice calls `greeting` and `name` microservice to create a message and return the response.
+
 - Each microservice is in a different repo:
 
 	Service | Link
@@ -98,7 +100,7 @@ This repo explains how AWS X-Ray can be used for distributed debugging in Kubern
 	curl http://$(kubectl get svc/myapp-webapp -o jsonpath='{.status.loadBalancer.ingress[0].hostname}')
 	```
 
-- Open the [X-Ray console](https://us-west-2.console.aws.amazon.com/xray/home?region=us-west-2#/service-map) and watch the service map and traces.
+- Open [X-Ray console](https://us-west-2.console.aws.amazon.com/xray/home?region=us-west-2#/service-map) and watch the service map and traces.
 
 
 ## License Summary
