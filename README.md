@@ -1,4 +1,4 @@
-## Distributed Debugging for Kubernetes and Serverless Applications using AWS X-Ray
+# Distributed Debugging for Kubernetes and Serverless Applications using AWS X-Ray
 
 This repo explains how AWS X-Ray can be used for distributed debugging in Kubernetes and Serverless applications.
 
