@@ -1,4 +1,4 @@
-## AWS Xray Kubernetes Serverless
+## AWS X-Ray Kubernetes Serverless
 
 Show distributed debugging in Kubernetes and Serverless applications using AWS X-Ray
 
@@ -17,6 +17,18 @@ Show distributed debugging in Kubernetes and Serverless applications using AWS X
 
 	```
 	mvn package -Pdocker
+	```
+
+	By default, the Docker image name is `arungupta/<service>` where `<service>` is `greeting`, `name` or `webapp`. The image can be created in your repo:
+
+	```
+	mvn package -Pdocker -Ddocker.repo=<repo>
+	```
+
+	By default, the `latest` tag is used for the image. A different tag may be specified as:
+
+	```
+	mvn package -Pdocker -Ddocker.tag=<tag>
 	```
 
 - Push Docker image to the registry:
@@ -71,6 +83,8 @@ Show distributed debugging in Kubernetes and Serverless applications using AWS X
 	```
 	helm install --name myapp myapp
 	```
+
+	The application is configured to use `arungupta/<service>:xray`. Make sure to update the value in `myapp/values.yaml` to match your repo and tag.
 
 - Access the application:
 
