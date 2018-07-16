@@ -2,9 +2,32 @@
 
 Show distributed debugging in Kubernetes and Serverless applications using AWS X-Ray
 
+## Application
+
+- Each microservice is in a different repo:
+
+	Service | Link
+	------- | ----
+	`greeting` | https://github.com/arun-gupta/microservices-greeting
+	`name` | https://github.com/arun-gupta/microservices-name
+	`webapp` | https://github.com/arun-gupta/microservices-webapp
+
+- Clone all the repos
+- Create Docker image for each repo:
+
+	```
+	mvn package -Pdocker
+	```
+
+- Push Docker image to the registry:
+
+	```
+	mvn install -Pdocker
+	```
+
 ## Create Kubernetes Cluster
 
-https://github.com/kubernetes/kops[kops] is a commmunity-supported way to get a Kubernetes cluster up and running on AWS.
+[kops](https://github.com/kubernetes/kops) is a commmunity-supported way to get a Kubernetes cluster up and running on AWS.
 
 - Set AZs:
 
