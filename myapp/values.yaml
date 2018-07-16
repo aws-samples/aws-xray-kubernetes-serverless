@@ -12,3 +12,7 @@ webapp:
 
 docker:
   tag: xray
+
+xray:
+  env: AWS_XRAY_DAEMON_ADDRESS
+  service: xray-service.default:2000
