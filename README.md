@@ -15,28 +15,16 @@ The application consists of three microservices: `webapp`, `greeting`, and `name
 	`webapp` | https://github.com/arun-gupta/microservices-webapp
 
 - Clone all the repos
-- Create Docker image for each repo:
-
-	```
-	mvn package -Pdocker
-	```
-
-	By default, the Docker image name is `arungupta/<service>` where `<service>` is `greeting`, `name` or `webapp`. The image can be created in your repo:
-
-	```
-	mvn package -Pdocker -Ddocker.repo=<repo>
-	```
-
-	By default, the `latest` tag is used for the image. A different tag may be specified as:
-
-	```
-	mvn package -Pdocker -Ddocker.tag=<tag>
-	```
-
-	By default, the Helm charts for deploying the application use `arungupta` repo and `xray` tag. These images can be created using the following command:
+- Create Docker image for each repo. By default, the images are generated with `arungupta` repo and `latest` tag. Helm charts used for deploying the application use `xray` tag. These images can be created using the following command:
 
 	```
 	mvn package -Pdocker -Ddocker.tag=xray
+	```
+
+	The images can be created in a different repo as:
+
+	```
+	mvn package -Pdocker -Ddocker.repo=<repo>
 	```
 
 - Push Docker image to the registry:
