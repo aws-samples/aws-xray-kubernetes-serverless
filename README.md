@@ -31,10 +31,19 @@ The application consists of three microservices: `webapp`, `greeting`, and `name
 
 Use [Amazon Elastic Container Service for Kubernetes](https://aws.amazon.com/eks/) to create a fully managed Kubernetes cluster.
 
-- Create your cluster:
+- The cluster can be created in the following ways:
 	- Follow the steps outlined at [Getting Started with EKS](https://docs.aws.amazon.com/eks/latest/userguide/getting-started.html) to create your EKS cluster.
 
-	- Use [eksctl](https://eksctl.io) to simplify the steps necessary to create your culuster. Install `eksctl` on your machine and run `eksctl create cluster` to set up a 2 node cluster will be created for you. See the documentation for all setup options.
+	- Use [eksctl](https://eksctl.io) CLI to simplify the steps necessary to create your culuster. Install `eksctl` on your machine and create a 2 node cluster in `us-east-1` region:
+
+		```
+		eksctl create cluster \
+			--name myeks \
+			--region us-east-1 \
+			--zones us-east-1a,us-east-1b,us-east-1d
+		```
+	
+		See the documentation for all setup options.
 
 ## Setup X-Ray in Kubernetes
 
