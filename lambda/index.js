@@ -1,9 +1,10 @@
 
 var AWSXRay = require("aws-xray-sdk-core");
-var AWS = require("aws-sdk");
+var logger = require('winston');
+AWSXRay.setLogger(logger);
+var AWS = AWSXRay.captureAWS(require('aws-sdk'));
 
-const DynamoDB = require('aws-sdk/clients/dynamodb') // aws-sdk v2.193.0
-const dynamodb = AWSXRay.captureAWSClient(new DynamoDB())
+var ddb = new AWS.DynamoDB();
 
 exports.handler = (event, context, callback) => {
     var table = "xrayk8s";
@@ -31,7 +32,7 @@ console.log("Adding a new message to DynamoDB: "+message);
 response.message = "Adding a new message to DynamoDB: "+message;
 
 AWSXRay.captureAsyncFunc("## dynamodb", function(subsegment) {
-    dynamodb.putItem(params, function(err, data) {
+    ddb.putItem(params, function(err, data) {
         if (err) {
             console.error("Unable to add item. Error JSON:", JSON.stringify(err, null, 2));
             response.message = "Unable to add item. Error JSON:", JSON.stringify(err, null, 2);
@@ -40,6 +41,9 @@ AWSXRay.captureAsyncFunc("## dynamodb", function(subsegment) {
             response.message = "Added item:", JSON.stringify(data, null, 2);
         }
     });
+    subsegment.addAnnotation("username",username);
+    subsegment.addAnnotation("message",message);
+
     subsegment.close();
 });
 
