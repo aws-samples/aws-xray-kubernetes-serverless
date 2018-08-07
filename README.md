@@ -35,30 +35,12 @@ The application consists of three microservices: `webapp`, `greeting`, and `name
 
 ## Create Kubernetes Cluster
 
-[kops](https://github.com/kubernetes/kops) is a commmunity-supported way to get a Kubernetes cluster up and running on AWS.
+Use [Amazon Elastic Container Service for Kubernetes](https://aws.amazon.com/eks/) to create a fully managed Kubernetes cluster.
 
-- Set AZs:
+- Create your cluster:
+	- Follow the steps outlined at [Getting Started with EKS](https://docs.aws.amazon.com/eks/latest/userguide/getting-started.html) to create your EKS cluster.
 
-	```
-	export AWS_AVAILABILITY_ZONES="$(aws ec2 describe-availability-zones \
-		--query 'AvailabilityZones[].ZoneName' \
-		--output text | \
-		awk -v OFS="," '$1=$1')"
-	```
-
-- Set state store: `export KOPS_STATE_STORE=s3://kubernetes-aws-io`
-- Create cluster:
-
-	```
-	kops create cluster \
-		--zones ${AWS_AVAILABILITY_ZONES} \
-		--master-count 1 \
-		--master-size m4.xlarge \
-		--node-count 3 \
-		--node-size m4.2xlarge \
-		--name xray.k8s.local \
-		--yes
-	```
+	- Use [eksctl](https://eksctl.io) to simplify the steps necessary to create your culuster. Install `eksctl` on your machine and run `eksctl create cluster` to set up a 2 node cluster will be created for you. See the documentation for all setup options.
 
 ## Setup X-Ray in Kubernetes
 
@@ -69,6 +51,7 @@ The application consists of three microservices: `webapp`, `greeting`, and `name
 	docker build -t arungupta/xray:latest .
 	docker image push arungupta/xray:us-west-2
 	```
+- Ensure your Kubernetes worker nodes have the IAM permissions to write trace data to the X-Ray service. Add the `AWSXrayWriteOnlyAccess` policy to the EC2 Instance role of your EKS worker nodes in IAM.
 
 - Deploy the DaemonSet: `kubectl apply -f xray-daemonset.yaml`
 
