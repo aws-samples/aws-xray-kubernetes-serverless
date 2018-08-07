@@ -31,28 +31,29 @@ The application consists of three microservices: `webapp`, `greeting`, and `name
 
 Use [Amazon Elastic Container Service for Kubernetes](https://aws.amazon.com/eks/) to create a fully managed Kubernetes cluster.
 
-- The cluster can be created in the following ways:
-	- Follow the steps outlined at [Getting Started with EKS](https://docs.aws.amazon.com/eks/latest/userguide/getting-started.html) to create your EKS cluster.
+The cluster can be created in the following ways
 
-	- Use [eksctl](https://eksctl.io) CLI to simplify the steps necessary to create your culuster. Install `eksctl` on your machine and create a 2 node cluster in `us-east-1` region:
+- Follow the steps outlined at [Getting Started with EKS](https://docs.aws.amazon.com/eks/latest/userguide/getting-started.html) to create your EKS cluster.
 
-		```
-		eksctl create cluster \
-			--name myeks \
-			--region us-east-1 \
-			--zones us-east-1a,us-east-1b,us-east-1d
-		```
-	
-		See the documentation for all setup options.
+- Use [eksctl](https://eksctl.io) CLI to simplify the steps necessary to create your culuster. Install `eksctl` on your machine and create a 2 node cluster in `us-east-1` region:
+
+	```
+	eksctl create cluster \
+		--name myeks \
+		--region us-east-1 \
+		--zones us-east-1a,us-east-1b,us-east-1d
+	```
+
+	See the documentation for all setup options.
 
 ## Setup X-Ray in Kubernetes
 
-- `arungupta/xray:us-west-2` Docker image is already available on Docker Hub. Optionally, you may build the image:
+- `arungupta/xray:latest` Docker image is already available on Docker Hub. Optionally, you may build the image:
 
 	```
 	cd config/xray
-	docker build -t arungupta/xray:latest .
-	docker image push arungupta/xray:us-west-2
+	docker image build -t arungupta/xray:latest .
+	docker image push arungupta/xray:latest
 	```
 - Ensure your Kubernetes worker nodes have the IAM permissions to write trace data to the X-Ray service. Add the `AWSXrayWriteOnlyAccess` policy to the EC2 Instance role of your EKS worker nodes in IAM.
 
