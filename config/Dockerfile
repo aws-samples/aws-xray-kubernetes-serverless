@@ -1,5 +1,5 @@
-# Use Amazon Linux Version 1
-FROM amazonlinux:1
+# Use Amazon Linux Version 2
+FROM amazonlinux:2
 
 # Download latest 2.x release of X-Ray daemon
 RUN yum install -y unzip && \
@@ -13,7 +13,7 @@ RUN yum install -y unzip && \
 # Expose port 2000 on udp
 EXPOSE 2000/udp
 
-ENTRYPOINT ["/usr/bin/xray"]
+ENTRYPOINT ["/usr/bin/xray", "-b", "0.0.0.0:2000"]
 
 # No cmd line parameters, use default configuration
 CMD [''] 
