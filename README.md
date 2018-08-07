@@ -15,22 +15,16 @@ The application consists of three microservices: `webapp`, `greeting`, and `name
 	`webapp` | https://github.com/arun-gupta/microservices-webapp
 
 - Clone all the repos
-- Create Docker image for each repo. By default, the images are generated with `arungupta` repo and `latest` tag. Helm charts used for deploying the application use `xray` tag. These images can be created using the following command:
+- Create Docker image and push them to a registry for each repo. By default, the images are generated with `arungupta` repo and `latest` tag. Helm charts used for deploying the application use `xray` tag. These images can be created and pushed using the following command:
 
 	```
-	mvn package -Pdocker -Ddocker.tag=xray
+	mvn install -Pdocker -Ddocker.tag=xray
 	```
 
 	The images can be created in a different repo as:
 
 	```
-	mvn package -Pdocker -Ddocker.repo=<repo>
-	```
-
-- Push Docker image to the registry:
-
-	```
-	mvn install -Pdocker
+	mvn install -Pdocker -Ddocker.repo=<repo> -Ddocker.tag=xray
 	```
 
 ## Create Kubernetes Cluster
