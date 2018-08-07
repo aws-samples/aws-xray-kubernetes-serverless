@@ -31,9 +31,13 @@ The application consists of three microservices: `webapp`, `greeting`, and `name
 
 Use [Amazon Elastic Container Service for Kubernetes](https://aws.amazon.com/eks/) to create a fully managed Kubernetes cluster.
 
-The cluster can be created in the following ways
+The cluster can be created in any of the following ways.
+
+### EKS Getting Started
 
 - Follow the steps outlined at [Getting Started with EKS](https://docs.aws.amazon.com/eks/latest/userguide/getting-started.html) to create your EKS cluster.
+
+### eksctl CLI
 
 - Use [eksctl](https://eksctl.io) CLI to simplify the steps necessary to create your culuster. Install `eksctl` on your machine and create a 2 node cluster in `us-east-1` region:
 
@@ -45,6 +49,24 @@ The cluster can be created in the following ways
 	```
 
 	See the documentation for all setup options.
+
+- Download Heptio Authenticator AWS:
+
+	```
+	curl -o heptio-authenticator-aws \
+		-L \
+		https://github.com/kubernetes-sigs/aws-iam-authenticator/releases/download/v0.3.0/heptio-authenticator-aws_0.3.0_darwin_amd64
+	chmod +x heptio-authenticator-aws
+	```
+
+- Check the nodes:
+
+	```
+	$ kubectl get nodes
+	NAME                             STATUS    ROLES     AGE       VERSION
+	ip-192-168-118-78.ec2.internal   Ready     <none>    37m       v1.10.3
+	ip-192-168-194-4.ec2.internal    Ready     <none>    37m       v1.10.3
+	```
 
 ## Setup X-Ray in Kubernetes
 
@@ -60,6 +82,15 @@ The cluster can be created in the following ways
 - Deploy the DaemonSet: `kubectl apply -f xray-daemonset.yaml`
 
 ## Deploy the Application
+
+- Install Helm:
+
+	```
+	brew install kubernetes-helm
+	kubectl -n kube-system create sa tiller
+	kubectl create clusterrolebinding tiller --clusterrole cluster-admin --serviceaccount=kube-system:tiller
+	helm init --service-account tiller
+	```
 
 - Deploy the application:
 
