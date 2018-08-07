@@ -106,7 +106,7 @@ The cluster can be created in any of the following ways.
 	curl http://$(kubectl get svc/myapp-webapp -o jsonpath='{.status.loadBalancer.ingress[0].hostname}')
 	```
 
-- Open [X-Ray console](https://us-west-2.console.aws.amazon.com/xray/home?region=us-west-2#/service-map) and watch the service map and traces.
+- Open [X-Ray console](https://console.aws.amazon.com/xray/home?region=us-east-1#/service-map) and watch the service map and traces.
 
 
 ## License Summary
