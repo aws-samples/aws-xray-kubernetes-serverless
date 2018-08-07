@@ -108,9 +108,13 @@ The cluster can be created in any of the following ways.
 
 - Open [X-Ray console](https://console.aws.amazon.com/xray/home?region=us-east-1#/service-map) and watch the service map and traces.
 
-![X-Ray Service Map](file://./images/xray-service-map.png "X-Ray Service Map")
+### X-Ray Service Map
 
-![X-Ray Service Map](file://./images/xray-traces.png "X-Ray Traces")
+![X-Ray Service Map](images/xray-service-map.png "X-Ray Service Map")
+
+### X-Ray Traces
+
+![X-Ray Traces](images/xray-traces.png "X-Ray Traces")
 
 
 ## License Summary
