@@ -1,0 +1,15 @@
+{
+  "name": "k8swebinar",
+  "version": "1.0.0",
+  "description": "Lambda function with API GW for k8swebinar",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "aws-sdk": "^2.287.0",
+    "aws-xray-sdk": "^1.3.0"
+  }
+}
