@@ -77,7 +77,12 @@ The cluster can be created in any of the following ways.
 	docker image build -t arungupta/xray:latest .
 	docker image push arungupta/xray:latest
 	```
-- Ensure your Kubernetes worker nodes have the IAM permissions to write trace data to the X-Ray service. Add the `AWSXrayWriteOnlyAccess` policy to the EC2 Instance role of your EKS worker nodes in IAM.
+- Ensure your Kubernetes worker nodes have the necessary IAM permissions to write trace data to the X-Ray service. Add the `AWSXrayWriteOnlyAccess` policy to the EC2 Instance role of your EKS worker nodes in IAM.
+
+	This command will attach the Xray write only policy to your DefaultNodeGroup.
+	```
+	$ aws iam attach-role-policy --role-name $(aws iam list-roles | jq -r '.Roles | .[] | .RoleName' | grep DefaultNodeGroup) --policy-arn arn:aws:iam::aws:policy/AWSXrayWriteOnlyAccess
+	```
 
 - Deploy the DaemonSet: `kubectl apply -f xray-daemonset.yaml`
 
