@@ -31,7 +31,7 @@ exports.handler = (event, context, callback) => {
 console.log("Adding a new message to DynamoDB: "+message);
 response.message = "Adding a new message to DynamoDB: "+message;
 
-AWSXRay.captureAsyncFunc("## dynamodb", function(subsegment) {
+AWSXRay.captureAsyncFunc("## Writing to DynamoDB", function(subsegment) {
     docClient.put(params, function(err, data) {
         if (err) {
             console.error("Unable to add item. Error JSON:", JSON.stringify(err, null, 2));
