@@ -45,7 +45,7 @@ The cluster can be created in any of the following ways.
 	eksctl create cluster \
 		--name myeks \
 		--region us-east-1 \
-		--zones us-east-1a,us-east-1b,us-east-1d
+		--zones us-east-1b,us-east-1c,us-east-1d
 	```
 
 	See the documentation for all setup options.

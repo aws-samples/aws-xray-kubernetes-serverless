@@ -1,13 +1,13 @@
 greeting:
-  image: arungupta/greeting
+  image: ckassen/greeting
   replicaCount: 1
 
 name:
-  image: arungupta/name
+  image: ckassen/name
   replicaCount: 1
 
 webapp:
-  image: arungupta/webapp
+  image: ckassen/webapp
   replicaCount: 1
 
 docker:
@@ -16,3 +16,7 @@ docker:
 xray:
   env: AWS_XRAY_DAEMON_ADDRESS
   service: xray-service.default:2000
+
+tracker:
+  env: LAMBDA_TRACKER
+  service: https://yb3810qx3a.execute-api.us-east-1.amazonaws.com/Prod

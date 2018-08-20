@@ -1,0 +1,47 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: An AWS Serverless Specification template describing your function.
+Outputs:
+  ApiURL:
+    Description: API endpoint URL for Prod environment
+    Value:
+      Fn::Sub: https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/
+  TableName:
+    Value:
+      Ref: MyTable
+Resources:
+  MyTable:
+    Properties:
+      PrimaryKey:
+        Name: id
+        Type: Number
+      ProvisionedThroughput:
+        ReadCapacityUnits: 1
+        WriteCapacityUnits: 1
+      Tags:
+        AppType: Serverless
+    Type: AWS::Serverless::SimpleTable
+  myfunction:
+    Properties:
+      CodeUri: s3://chrkas-sam-lambda/c454dbf8838849b0e736661d0d6b1b6e
+      Description: ''
+      Environment:
+        Variables:
+          TABLE_NAME:
+            Ref: MyTable
+      Events:
+        Api1:
+          Properties:
+            Method: GET
+            Path: /
+          Type: Api
+      Handler: index.handler
+      MemorySize: 128
+      Policies:
+      - DynamoDBCrudPolicy:
+          TableName:
+            Ref: MyTable
+      Runtime: nodejs6.10
+      Timeout: 5
+      Tracing: Active
+    Type: AWS::Serverless::Function
+Transform: AWS::Serverless-2016-10-31
