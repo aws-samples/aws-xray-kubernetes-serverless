@@ -20,10 +20,10 @@ spec:
         - containerPort: 8082
         readinessProbe:
           httpGet:
-            path: /resources/names/1
+            path: /resources/health
             port: 8082
-          initialDelaySeconds: 50
-          periodSeconds: 5
+          initialDelaySeconds: 60
+          periodSeconds: 15
         env:
         - name: {{ .Values.xray.env }}
           value: {{ .Values.xray.service }}

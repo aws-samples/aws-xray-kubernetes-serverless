@@ -33,9 +33,11 @@ spec:
           value: /resources/greeting
         - name: {{ .Values.xray.env }}
           value: {{ .Values.xray.service }}
+        - name: {{ .Values.tracker.env }}
+          value: {{ .Values.tracker.service }}
         readinessProbe:
           httpGet:
-            path: /
+            path: /health
             port: 8080
           initialDelaySeconds: 60
           periodSeconds: 5
