@@ -10,12 +10,12 @@ The application consists of three microservices: `webapp`, `greeting`, and `name
 
 	Service | Link
 	------- | ----
-	`greeting` | https://github.com/arun-gupta/microservices-greeting
-	`name` | https://github.com/arun-gupta/microservices-name
-	`webapp` | https://github.com/arun-gupta/microservices-webapp
+	`greeting` | https://github.com/ckassen/microservices-greeting
+	`name` | https://github.com/ckassen/microservices-name
+	`webapp` | https://github.com/ckassen/microservices-webapp
 
 - Clone all the repos
-- Create Docker image and push them to a registry for each repo. By default, the images are generated with `arungupta` repo and `latest` tag. Helm charts used for deploying the application use `xray` tag. These images can be created and pushed using the following command:
+- Create Docker image and push them to a registry for each repo. By default, the images are generated with `ckassen` repo and `xray` tag. Helm charts used for deploying the application use `xray` tag. These images can be created and pushed using the following command:
 
 	```
 	mvn install -Pdocker -Ddocker.tag=xray
